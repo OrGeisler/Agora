@@ -1,0 +1,7 @@
+.card{
+    margin: auto;
+    margin-top: 20px;
+    filter: drop-shadow(5px 5px 5px #222);
+    border-radius: 5%;
+    background-color: aquamarine;
+}
