@@ -7,24 +7,24 @@ export const inventorySlice = createSlice({
     },
 
     reducers: {
-        addProduct: (state, action) => {
-            let newProduct = action.payload
-            state.products.push(newProduct)
+        addItem: (state, action) => {
+            let newItem = action.payload
+            state.products.push(newItem)
         },
 
-        removeProduct: (state, action) => {
-            let productToRemove = action.payload
-            state.products = state.products.filter(product => product.name != productToRemove)
+        removeItem: (state, action) => {
+            let itemToRemove = action.payload
+            state.products = state.products.filter(product => product.name != itemToRemove)
         }, 
 
         changePrice: (state, action) => {
             const {name, price} = action.payload
-            let productToUpdate = state.products.find(product => product.name === name)
-            productToUpdate.price = price
+            let itemToUpdate = state.products.find(product => product.name === name)
+            itemToUpdate.price = price
         }
     }
 })
 
-export const {addProduct, removeProduct, changePrice} = inventorySlice.actions
+export const {addItem, removeItem, changePrice} = inventorySlice.actions
 export const selectInventory = (state) => state.inventory.products
 export default inventorySlice.reducer

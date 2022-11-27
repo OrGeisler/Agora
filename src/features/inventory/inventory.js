@@ -1,7 +1,7 @@
 import React from "react";
 import {
-  addProduct,
-  removeProduct,
+    addItem,
+  removeItem,
   changePrice,
   selectInventory,
 } from "./inventorySlice";
@@ -12,25 +12,25 @@ import Item from "../item/item";
 
 
 export default function Inventory() {
-    const [productInputs, setProductInputs] = useState({name: "", price: ""})
+    const [itemInputs, setitemInputs] = useState({name: "", price: ""})
     const inventory = useSelector(selectInventory);
     const dispatch = useDispatch();
 
-    const deleteProduct = function(productName){
-        dispatch(removeProduct(productName))
+    const handleInput = function(event){
+        setitemInputs({...itemInputs, [event.target.name]: event.target.value})
     }
 
-    const addNewProduct = function(){
-        let newProduct = {name: productInputs.name, price: productInputs.price}
-        dispatch(addProduct(newProduct))
+    const deleteItem = function(productName){
+        dispatch(removeItem(productName))
     }
 
     const updatePrice = function(product){
         dispatch(changePrice(product))
     }
 
-    const handleInput = function(event){
-        setProductInputs({...productInputs, [event.target.name]: event.target.value})
+    const addNewItem = function(){
+        let newProduct = {name: itemInputs.name, price: itemInputs.price}
+        dispatch(addItem(newProduct))
     }
 
     return (
@@ -41,7 +41,7 @@ export default function Inventory() {
                 <input
                     type="text"
                     name="name"
-                    value={productInputs.name}
+                    value={itemInputs.name}
                     placeholder="Item Name"
                     onChange={handleInput}
                 ></input>
@@ -49,16 +49,16 @@ export default function Inventory() {
                 <input
                     type="number"
                     name="price"
-                    value={productInputs.price}
+                    value={itemInputs.price}
                     placeholder="Item Price"
                     onChange={handleInput}
                 ></input>
 
-                <button  onClick={addNewProduct}>Add</button>
+                <button  onClick={addNewItem}>Add</button>
             </div>
             <div >
                 {inventory.map((product) => (
-                    <Item key={product.name} product={product} deleteProduct={deleteProduct} updateProductPrice={updatePrice}/>
+                    <Item key={product.name} product={product} deleteItem={deleteItem} updateItem={updatePrice}/>
                 ))}
             </div>
         </div>
